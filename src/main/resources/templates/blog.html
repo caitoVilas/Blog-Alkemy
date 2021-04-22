@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/template :: head">
+</head>
+
+<body>
+   <header th:replace="plantillas/template :: header">
+   </header>
+   <!-- Contenido -->
+   <div class="container bg-danger text-white text-center py-2 mt-2">
+         <h2>Blog</h2>
+   </div>
+   <div class="container bg-dark py-2 mb-2 mt-2">
+    <table class="table table-striped table-dark mt-4">
+        <thead>
+          <tr>
+            <th scope="col">Imagen</th>  
+            <th >Fecha</th>
+            <th >Categoria</th>
+            <th>titulo</th>
+            <th></th> 
+            <th></th> 
+            <th></th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr  th:each="post: ${posts.content}">
+            <td  colspan="1" >
+               <img th:if="${#strings.length(post.image) > 0}" th:src="@{'/upload/' +  ${post.image}}" class="card-img-top" th:alt="${post.title}"  style="width: 10%; border-radius: 50%;">
+               <img th:if="${#strings.length(post.image) == 0}" th:src="@{'/upload/default.jpeg'}" class="card-img-top" th:alt="${post.title}" style="width: 10%; border-radius: 50%;">
+            </td> 
+            <td th:text="${#temporals.format(post.createAt, 'dd/MMM/yyyy')}"></td>
+            <td th:text="${post.category}"></td>
+            <td colspan="2" th:text="${post.title}"></td>
+            <td>
+                <a class="btn btn-outline-primary" th:href="@{/api/post/detalle/} + ${post.id}"><i class="fas fa-search-plus"></i></a>
+             </td>
+             <td>
+                <a class="btn btn-outline-success" th:href="@{/api/post/edit/} + ${post.id}"><i class="fas fa-edit"></i></a>
+             </td>
+             <td>
+                <a class="btn btn-outline-danger" 
+                th:href="@{/api/post/delete/} + ${post.id}"
+                onclick="return confirm('Esta seguro de ELIMINAR el Post?')"
+                ><i class="fas fa-trash-alt"></i></a>
+             </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Paginacion -->
+      <nav aria-label="Page navigation example">
+         <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${prev  == 0 ? 'disabled' : ''}">
+               <a th:href="@{/blog/} + ${prev - 1}" class="page-link">Anterior</a>
+            </li>
+           <li class="page-item" th:each="page :  ${t_pages}" th:classappend="${current + 1 == page ? 'active' : ''}">
+              <a th:href="@{/blog/} + ${page -1}" class="page-link" th:text="${page}"></a>
+           </li>
+           <li class="page-item" th:classappend="${current +1 == last ? 'disabled' : ''}">
+            <a th:href="@{/blog/} + ${next -1}" class="page-link">Siguiente</a>
+         </li>
+         </ul>
+       </nav>
+   </div>
+   
+  
+   <footer th:replace="plantillas/template :: footer">
+   </footer>
+
+
+</body>
+
+</html>

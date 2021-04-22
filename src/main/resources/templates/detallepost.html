@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/template :: head">
+</head>
+
+<body>
+   <header th:replace="plantillas/template :: header">
+   </header>
+   <!-- Contenido -->
+   <div class="container bg-danger text-white text-center py-2 mt-2">
+         <h2 th:text="${titulo}"></h2>
+   </div>
+   
+  <div class="container bg-secondary text-center mt-4 mb-4 py-4">
+    <div class="card text-center py-2 ml-auto mr-auto" style="width: 30rem;">
+        <img th:if="${#strings.length(post.image) > 0}" th:src="@{'/upload/' +  ${post.image}}" class="card-img-top" th:alt="${post.title}">
+        <img th:if="${#strings.length(post.image) == 0}" th:src="@{'/upload/default.jpeg'}" class="card-img-top" th:alt="${post.title}">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${post.title}"></h5>
+          <p class="card-text" th:text="${post.content}"></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" th:text="${post.category}"></li>
+          <li class="list-group-item" th:text="${post.createAt}"></li>
+        </ul>
+      </div>
+   
+  </div>
+   <footer th:replace="plantillas/template :: footer">
+   </footer>
+
+
+</body>
+
+</html>

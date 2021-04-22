@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/template :: head">
+</head>
+
+<body>
+   <header th:replace="plantillas/template :: header">
+   </header>
+   <!-- Contenido -->
+   <div class="container bg-danger text-white text-center py-2 mt-2">
+         <h2 th:text="${titulo}"></h2>
+   </div>
+   <div class="container bg-secondary mt-1 mb-2  py-2">
+    <div class="container bg-secondary mt-1 py-2 text-center">
+        <form th:object="${post}" th:action="@{/save}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}">
+            <input type="text" 
+            th:field="*{title}"
+            placeholder="Ingrese Titulo"
+            class="form-control mb-2"
+            >
+            <p class="form-text text-danger bg-light" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+            <input 
+            type="text"
+            th:field="*{category}"
+            placeholder="Ingrese la Categoria"
+            class="form-control mb-2"
+            >
+            <p class="form-text text-danger bg-light" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
+            <textarea 
+            th:field="*{content}"
+            placeholder="Ingrese Aqui el contenido"
+            cols="30" 
+            rows="8"
+            class="form-control mb-2">
+        </textarea>
+        <p class="form-text text-danger bg-light" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
+        <input 
+        type="file"
+        name="file"
+        placeholder="Ingrese Imagen"
+        class="form-control mb-1"
+        >
+       <input type="submit" class="btn btn-success" value="Guardar" />
+        </form>
+    </div>
+   </div>
+  
+   <footer th:replace="plantillas/template :: footer">
+   </footer>
+
+
+</body>
+
+</html>

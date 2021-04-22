@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/template :: head">
+</head>
+
+<body>
+   <header th:replace="plantillas/template :: header">
+   </header>
+   <!-- Contenido -->
+   <div class="container bg-danger text-white text-center py-2 mt-2">
+         <h1>Blog alkemy</h1>
+         <h2>Bienvenid@s</h2>
+   </div>
+   <h2 class="text-center mt-1 text-danger">Ultimos Posts</h2>
+  <div class="container">
+   <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th >titulo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="post: ${posts.content}">
+          <td th:text="${#temporals.format(post.createAt, 'dd/MMM/yyyy')}"></td>
+          <td th:text="${post.title}"></td>
+          <td>
+             <a th:href="@{/api/post/detalle/} + ${post.id}" 
+             class="btn btn-outline-primary">
+             <i class="fas fa-search-plus"></i></a>
+          </td>
+      </tbody>
+    </table>
+  </div>
+   <footer th:replace="plantillas/template :: footer">
+   </footer>
+
+
+</body>
+
+</html>
