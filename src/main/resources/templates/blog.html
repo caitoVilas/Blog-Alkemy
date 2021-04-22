@@ -27,8 +27,8 @@
         <tbody>
           <tr  th:each="post: ${posts.content}">
             <td  colspan="1" >
-               <img th:if="${#strings.length(post.image) > 0}" th:src="@{'/upload/' +  ${post.image}}" class="card-img-top" th:alt="${post.title}"  style="width: 10%; border-radius: 50%;">
-               <img th:if="${#strings.length(post.image) == 0}" th:src="@{'/upload/default.jpeg'}" class="card-img-top" th:alt="${post.title}" style="width: 10%; border-radius: 50%;">
+               <img th:if="${#strings.length(post.image) > 0}" th:src="@{'/upload/' +  ${post.image}}" class="card-img-top" th:alt="${post.title}"  style="width: 75px; height: 75px; border-radius: 50%;">
+               <img th:if="${#strings.length(post.image) == 0}" th:src="@{'/upload/default.jpeg'}" class="card-img-top" th:alt="${post.title}"style="width: 75px; height: 75px; border-radius: 50%;" >
             </td> 
             <td th:text="${#temporals.format(post.createAt, 'dd/MMM/yyyy')}"></td>
             <td th:text="${post.category}"></td>
