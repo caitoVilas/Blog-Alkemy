@@ -3,6 +3,8 @@ package com.alkemy.blog.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -15,6 +17,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE posts SET deleted=true WHERE id=?")
+@Where(clause = "deleted = false")
 public class Post implements Serializable {
 
     @Id
@@ -34,6 +38,7 @@ public class Post implements Serializable {
     @Column(name = "create_at")
     private LocalDate createAt;
     private String image;
+    private boolean deleted;
 
 
 
