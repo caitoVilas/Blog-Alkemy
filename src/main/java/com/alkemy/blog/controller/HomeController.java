@@ -86,8 +86,8 @@ public class HomeController {
     }
 
     @PostMapping("/save")
-    public String guardar(@Valid @ModelAttribute Post post, @RequestParam("file") MultipartFile image,
-                          BindingResult result, Model model){
+    public String guardar(@Valid @ModelAttribute Post post, BindingResult result ,
+                          @RequestParam("file") MultipartFile image, Model model){
 
         if (result.hasErrors()){
             model.addAttribute("titulo", "Nuevo Post");
