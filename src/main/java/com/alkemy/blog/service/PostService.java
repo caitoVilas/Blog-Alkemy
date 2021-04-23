@@ -43,12 +43,7 @@ public class PostService implements IPostService{
     @Override
     @Transactional
     public Post save(Post post) throws Exception {
-               /*if (!file.isEmpty()){
-                String ruta = "c://images";
-                byte[] bytes = file.getBytes();
-                Path rutaAbsoluta = Paths.get(ruta + file.getOriginalFilename());
-                Files.write(rutaAbsoluta, bytes);
-                post.setImage(file.getOriginalFilename());*/
+
         try {
               return postRepository.save(post);
         }catch (Exception e){

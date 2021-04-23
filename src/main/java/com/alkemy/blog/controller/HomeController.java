@@ -86,8 +86,8 @@ public class HomeController {
     }
 
     @PostMapping("/save")
-    public String guardar(@Valid @ModelAttribute Post post, @RequestParam("file") MultipartFile image,
-                          BindingResult result, Model model){
+    public String guardar(@Valid @ModelAttribute Post post, BindingResult result,
+                          @RequestParam("file") MultipartFile image, Model model){
 
         if (result.hasErrors()){
             model.addAttribute("titulo", "Nuevo Post");
@@ -100,11 +100,10 @@ public class HomeController {
             Path rootPath = Paths.get("upload").resolve(uniqueFilename);
             Path rootAbsolutePath = rootPath.toAbsolutePath();
             try {
-
                   Files.copy(image.getInputStream(), rootAbsolutePath);
                 post.setImage(uniqueFilename);
             }catch (Exception e){
-                e.printStackTrace();
+                System.out.println("el archivo no tiene contenido");
 
             }
         }else {
